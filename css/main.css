@@ -1,0 +1,23 @@
+body{
+    font-family: 'Inconsolata', 'Times New Roman';
+    margin: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(215, 189, 189);
+    margin: 0px;
+    padding: 3vh 2vw 3vh 2vw;
+    
+
+}
+
+#navlinks {
+    display: block;
+}
