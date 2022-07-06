@@ -1,6 +1,7 @@
 body{
     font-family: 'Inconsolata', 'Times New Roman';
     margin: 0px;
+
 }
 
 a {
@@ -8,16 +9,48 @@ a {
     color: black;
 }
 
+a.anchor {
+    display: block;
+    position: relative;
+    top: -8vh;
+    visibility: hidden;
+}
+
 nav {
+    position: fixed;
+    width: 96%;
+    max-height: 8vh;
+
     display: flex;
     justify-content: space-between;
     background-color: rgb(215, 189, 189);
     margin: 0px;
     padding: 3vh 2vw 3vh 2vw;
-    
-
 }
 
 #navlinks {
-    display: block;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#buffer {
+    height: 8vh;
+}
+
+#socialsection {
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+    height: 90vh;
+    margin: 2%;
+
+}
+
+#social {
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+
+
 }
