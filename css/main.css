@@ -1,7 +1,7 @@
 body{
     font-family: 'Inconsolata', 'Times New Roman';
     margin: 0px;
-
+    background-color: rgb(37, 35, 35);
 }
 
 a {
@@ -28,6 +28,10 @@ nav {
     padding: 3vh 2vw 3vh 2vw;
 }
 
+#topleft {
+    width: 50%;
+}
+
 #navlinks {
     width: 50%;
     display: flex;
@@ -38,17 +42,32 @@ nav {
     height: 8vh;
 }
 
+#backgroundanimation {
+    position: fixed;
+    width: 100vw;
+    height: 92vh;
+    z-index: -1;
+    background-color: aliceblue;
+}
+
+#content{
+    margin: 2%;
+}
+
+#space {
+    height: 100vh;
+}
+
 #socialsection {
     display: grid;
     grid-template-columns: auto auto auto;
 
-    height: 90vh;
-    margin: 2%;
+    
 
 }
 
 #social {
-    justify-self: center;
+    justify-self: left;
     align-self: center;
     text-align: center;
 
