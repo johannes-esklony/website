@@ -1,12 +1,15 @@
 body{
     font-family: 'Inconsolata', 'Times New Roman';
     margin: 0px;
-    background-color: rgb(37, 35, 35);
+    background-color: rgb(0, 0, 0);
+    color: rgb(165, 213, 255);
+    cursor: none;
 }
 
 a {
     text-decoration: none;
-    color: black;
+    color: rgb(255, 231, 231);
+    cursor: none;
 }
 
 a.anchor {
@@ -23,7 +26,7 @@ nav {
 
     display: flex;
     justify-content: space-between;
-    background-color: rgb(215, 189, 189);
+    background-color: rgba(118, 20, 20, 0.185);
     margin: 0px;
     padding: 3vh 2vw 3vh 2vw;
 }
@@ -45,9 +48,9 @@ nav {
 #backgroundanimation {
     position: fixed;
     width: 100vw;
-    height: 92vh;
+    height: 100vh;
     z-index: -1;
-    background-color: aliceblue;
+    opacity: 50%;
 }
 
 #content{
