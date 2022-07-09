@@ -17,42 +17,69 @@ addEventListener('resize', () => {
     canvas.height = innerHeight
     init()
 })
+
+const links = document.querySelectorAll('a')
+highlight = false
+links.forEach(function(element) {
+    element.addEventListener("mouseover", setHighlight);
+});
+
+function setHighlight(){
+    highlight = true
+}
+links.forEach(function(element) {
+    element.addEventListener("mouseleave", unsetHighlight);
+});
+function unsetHighlight(){
+    highlight = false
+}
+// links.onmouseover = function(){
+//     highlight = true;
+// }
+// links.onmouseout = function(){
+//     highlight = false;
+// }
+
 // Objects
-function Circle(x, y, radius, color, alpha) {
+function Circle(x, y, radius, color, color2, alpha) {
     this.x = x
     this.y = y
     this.radius = radius
-    this.bigRadius = radius * 10
+    this.bigRadius = radius * 5
     this.color = color
+    this.color2 = color2
     this.mouseNear = false
     this.alpha = alpha
+    this.velocityMax = 0.01 //px per s
     this.velocity = {
-        x: Math.random() - 0.5, // Random x value from -0.5 to 0.5
-        y: Math.random() - 0.5 // Random y value from -0.5 to 0.5
+        x: Math.random() * this.velocityMax - (this.velocityMax / 2), // Random x value from -0.25 to 0.25
+        y: Math.random() * this.velocityMax - (this.velocityMax / 2) // Random y value from -0.25 to 0.25
     }
 }
 Circle.prototype.draw = function () {
     c.beginPath()
     if(this.mouseNear){
         c.arc(this.x, this.y, this.bigRadius, 0, Math.PI * 2, false)
-
     }
     else{
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
     }
 
     c.fillStyle = this.color
-
+    
     c.save();
     if(this.mouseNear){
         c.globalAlpha = 0.4;
+        if(highlight){
+            c.fillStyle = this.color2
+        }
     }
     c.fill()
     c.restore();
     
     c.closePath()
 }
-Object.prototype.update = function () {
+Object.prototype.update = function (deltatime) {
     if(inMouseRange(this)){
         this.mouseNear = true
     }
@@ -60,14 +87,19 @@ Object.prototype.update = function () {
         this.mouseNear = false
     }
     this.draw()
-    this.x += this.velocity.x // Move x coordinate
-    this.y += this.velocity.y // Move y coordinate
+
+    this.x += (this.velocity.x * deltatime) // Move x coordinate
+    this.y += (this.velocity.y * deltatime) // Move y coordinate
+
+    this.x = this.x % canvas.width
+    this.y = this.y % canvas.height
 }
 
 //functions
 
 function inMouseRange(circle){
-    if(1000 >= (mouse.x - circle.x)*(mouse.x - circle.x) + (mouse.y-circle.y) * (mouse.y-circle.y)){
+    range = 500
+    if(range >= (mouse.x - circle.x)*(mouse.x - circle.x) + (mouse.y-circle.y) * (mouse.y-circle.y)){
         return true 
     }else{
         return false
@@ -92,15 +124,31 @@ function init() {
             b: 20 + Math.random() * colorRange - (colorRange/2)
         }
         const color = `rgb(${rgb.r},${rgb.g},${rgb.b}`
-        circles.push(new Circle(x, y, radius, color, alpha))
+
+        let rgb2 = {
+            r: 160 + Math.random() * colorRange - (colorRange/2),
+            g: 190 + Math.random() * colorRange - (colorRange/2), 
+            b: 20 + Math.random() * colorRange - (colorRange/2)
+        }
+        const color2 = `rgb(${rgb2.r},${rgb2.g},${rgb2.b}`
+
+        circles.push(new Circle(x, y, radius, color, color2, alpha))
     }
 }
 // Animation Loop
+let timestamp
 function animate() {
     requestAnimationFrame(animate) // Create an animation loop
     c.clearRect(0, 0, canvas.width, canvas.height) // Erase whole canvas
+    let dn = Date.now()
+    if(timestamp === undefined){
+        deltatime = 0
+    }else {
+        deltatime = dn - timestamp
+    }
+    timestamp = dn;
     circles.forEach(circle => {
-        circle.update()
+        circle.update(deltatime)
     })
 }
 init()
