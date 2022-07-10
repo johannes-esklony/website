@@ -7,6 +7,11 @@ const mouse = {
     x: undefined,
     y: undefined
 }
+const touch = {
+    x: undefined,
+    y: undefined
+}
+
 // Event Listeners
 addEventListener('mousemove', event => {
     mouse.x = event.clientX
@@ -17,7 +22,11 @@ addEventListener('resize', () => {
     canvas.height = innerHeight
     init()
 })
-
+addEventListener('touchmove', function (e){
+    touch.x = e.touches.item(0).clientX
+    touch.y = e.touches.item(0).clientY
+    
+})
 const links = document.querySelectorAll('a')
 highlight = false
 links.forEach(function(element) {
@@ -33,12 +42,6 @@ links.forEach(function(element) {
 function unsetHighlight(){
     highlight = false
 }
-// links.onmouseover = function(){
-//     highlight = true;
-// }
-// links.onmouseout = function(){
-//     highlight = false;
-// }
 
 // Objects
 function Circle(x, y, radius, color, color2, color3, alpha) {
@@ -117,7 +120,7 @@ Object.prototype.update = function (deltatime) {
 
 function inMouseRange(circle){
     range = 1000
-    if(range >= (mouse.x - circle.x)*(mouse.x - circle.x) + (mouse.y-circle.y) * (mouse.y-circle.y)){
+    if(range >= (mouse.x - circle.x)*(mouse.x - circle.x) + (mouse.y-circle.y) * (mouse.y-circle.y) || range >= (touch.x - circle.x)*(touch.x - circle.x) + (touch.y-circle.y) * (touch.y-circle.y)){
         return true 
     }else{
         return false
