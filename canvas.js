@@ -41,14 +41,16 @@ function unsetHighlight(){
 // }
 
 // Objects
-function Circle(x, y, radius, color, color2, alpha) {
+function Circle(x, y, radius, color, color2, color3, alpha) {
     this.x = x
     this.y = y
     this.radius = radius
     this.bigRadius = radius * 5
     this.color = color
     this.color2 = color2
+    this.color3 = color3
     this.mouseNear = false
+    this.recentlyhovered = false
     this.alpha = alpha
     this.velocityMax = 0.01 //px per s
     this.velocity = {
@@ -65,14 +67,28 @@ Circle.prototype.draw = function () {
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
     }
 
-    c.fillStyle = this.color
-    
     c.save();
+    c.globalAlpha = 1 //this.alpha;
+
+    if(!this.recentlyhovered || highlight){
+        c.fillStyle = this.color2
+
+    }
+    else{
+        c.fillStyle = this.color2
+        c.globalAlpha = this.alpha;
+
+    }
+    
     if(this.mouseNear){
         c.globalAlpha = 0.4;
         if(highlight){
-            c.fillStyle = this.color2
+            c.fillStyle = this.color
+            c.globalAlpha = 0.9;
         }
+        this.recentlyhovered = true
+        var _this = this
+        setTimeout(function(){_this.recentlyhovered = false}, 1000)
     }
     c.fill()
     c.restore();
@@ -86,7 +102,9 @@ Object.prototype.update = function (deltatime) {
     else{
         this.mouseNear = false
     }
-    this.draw()
+    if(this.recentlyhovered || this.mouseNear){
+        this.draw()
+    }
 
     this.x += (this.velocity.x * deltatime) // Move x coordinate
     this.y += (this.velocity.y * deltatime) // Move y coordinate
@@ -98,7 +116,7 @@ Object.prototype.update = function (deltatime) {
 //functions
 
 function inMouseRange(circle){
-    range = 500
+    range = 1000
     if(range >= (mouse.x - circle.x)*(mouse.x - circle.x) + (mouse.y-circle.y) * (mouse.y-circle.y)){
         return true 
     }else{
@@ -110,7 +128,7 @@ function inMouseRange(circle){
 let circles = []
 function init() {
     circles = []
-    circlesAmount = canvas.width * canvas.height * 0.005
+    circlesAmount = canvas.width * canvas.height * 0.006
 
     for (let i = 0; i < circlesAmount; i++) {
         const x = Math.random() * canvas.width
@@ -125,14 +143,22 @@ function init() {
         }
         const color = `rgb(${rgb.r},${rgb.g},${rgb.b}`
 
+        //228, 246, 255
         let rgb2 = {
-            r: 160 + Math.random() * colorRange - (colorRange/2),
-            g: 190 + Math.random() * colorRange - (colorRange/2), 
-            b: 20 + Math.random() * colorRange - (colorRange/2)
+            r: 180 + Math.random() * colorRange - (colorRange/2),
+            g: 150 + Math.random() * colorRange - (colorRange/2), 
+            b: 170 + Math.random() * colorRange - (colorRange/2)
         }
         const color2 = `rgb(${rgb2.r},${rgb2.g},${rgb2.b}`
 
-        circles.push(new Circle(x, y, radius, color, color2, alpha))
+        let rgb3 = {
+            r: 200 + Math.random() * colorRange - (colorRange/2),
+            g: 210 + Math.random() * colorRange - (colorRange/2), 
+            b: 200 + Math.random() * colorRange - (colorRange/2)
+        }
+        const color3 = `rgb(${rgb3.r},${rgb3.g},${rgb3.b}`
+
+        circles.push(new Circle(x, y, radius, color, color2, color3, alpha))
     }
 }
 // Animation Loop
