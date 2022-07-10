@@ -27,6 +27,19 @@ addEventListener('touchmove', function (e){
     touch.y = e.touches.item(0).clientY
     
 })
+
+addEventListener('touchcancel', function(e){
+    touch = {
+        x: undefined,
+        y: undefined
+    }
+})
+addEventListener('touchend', function(e){
+    touch = {
+        x: undefined,
+        y: undefined
+    }
+})
 const links = document.querySelectorAll('a')
 highlight = false
 links.forEach(function(element) {
