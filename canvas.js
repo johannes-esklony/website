@@ -63,7 +63,7 @@ function Circle(x, y, radius, color, color2, color3, alpha) {
 }
 Circle.prototype.draw = function () {
     c.beginPath()
-    if(this.mouseNear){
+    if(this.mouseNear && !touch.x === undefined){
         c.arc(this.x, this.y, this.bigRadius, 0, Math.PI * 2, false)
     }
     else{
