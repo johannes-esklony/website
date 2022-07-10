@@ -68,10 +68,10 @@ Circle.prototype.draw = function () {
     }
 
     c.save();
-    c.globalAlpha = 0//this.alpha;
+    c.globalAlpha = 1 //this.alpha;
 
     if(!this.recentlyhovered || highlight){
-        c.fillStyle = this.color
+        c.fillStyle = this.color2
 
     }
     else{
@@ -83,7 +83,7 @@ Circle.prototype.draw = function () {
     if(this.mouseNear){
         c.globalAlpha = 0.4;
         if(highlight){
-            c.fillStyle = this.color3
+            c.fillStyle = this.color
             c.globalAlpha = 0.9;
         }
         this.recentlyhovered = true
@@ -102,7 +102,9 @@ Object.prototype.update = function (deltatime) {
     else{
         this.mouseNear = false
     }
-    this.draw()
+    if(this.recentlyhovered || this.mouseNear){
+        this.draw()
+    }
 
     this.x += (this.velocity.x * deltatime) // Move x coordinate
     this.y += (this.velocity.y * deltatime) // Move y coordinate
@@ -126,7 +128,7 @@ function inMouseRange(circle){
 let circles = []
 function init() {
     circles = []
-    circlesAmount = canvas.width * canvas.height * 0.005
+    circlesAmount = canvas.width * canvas.height * 0.006
 
     for (let i = 0; i < circlesAmount; i++) {
         const x = Math.random() * canvas.width
@@ -141,16 +143,17 @@ function init() {
         }
         const color = `rgb(${rgb.r},${rgb.g},${rgb.b}`
 
+        //228, 246, 255
         let rgb2 = {
-            r: 200 + Math.random() * colorRange - (colorRange/2),
-            g: 50 + Math.random() * colorRange - (colorRange/2), 
-            b: 200 + Math.random() * colorRange - (colorRange/2)
+            r: 180 + Math.random() * colorRange - (colorRange/2),
+            g: 150 + Math.random() * colorRange - (colorRange/2), 
+            b: 170 + Math.random() * colorRange - (colorRange/2)
         }
         const color2 = `rgb(${rgb2.r},${rgb2.g},${rgb2.b}`
 
         let rgb3 = {
             r: 200 + Math.random() * colorRange - (colorRange/2),
-            g: 200 + Math.random() * colorRange - (colorRange/2), 
+            g: 210 + Math.random() * colorRange - (colorRange/2), 
             b: 200 + Math.random() * colorRange - (colorRange/2)
         }
         const color3 = `rgb(${rgb3.r},${rgb3.g},${rgb3.b}`
