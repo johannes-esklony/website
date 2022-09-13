@@ -15,7 +15,7 @@
 <body>
     <nav>
         
-        <a class="navbar-brand" href="index.php">j_blog</a>
+        <a class="navbar-brand" href="index.php">blog</a>
         <div id="searchbar">
             <form class="d-flex">
                 <input class="form-control me-2" type="search" aria-label="Search">
