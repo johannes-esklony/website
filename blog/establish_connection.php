@@ -11,6 +11,6 @@
     die("Connection failed: " . $conn->connect_error);
     }
     //echo "Connected successfully";
-    $db_use = "use newsweit;";
+    $db_use = "use blog;";
     $conn->query($db_use);
 ?>

@@ -1,0 +1,34 @@
+/* blogspecific */
+
+/* override */
+#navlinks {
+    min-width: 400px;
+    max-width: 20vw;
+    align-items: center;
+}
+
+
+/* new */
+#searchbar {
+    padding: 2%;
+    margin: 2%;
+}
+form{
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    align-content: center;
+}
+input {
+    border: none;
+    padding: 2%;
+    margin-right: 1vw;
+}
+form button {
+    border: none;
+    padding: 3%;
+}
+
+a.art_card{
+    color: aliceblue;
+}

@@ -1,15 +1,18 @@
 body{
     font-family: 'Inconsolata', 'Times New Roman';
+    font-size: larger;
+    font-weight: 500;
     margin: 0px;
-    background-color: rgb(255, 255, 255);
-    color: rgb(17, 4, 4);
-    cursor: none;
+    padding: 0px;
+    background-color: rgb(110, 64, 64);
+    color: rgb(255, 253, 253);
+    /*cursor: none;*/
+    overflow: hidden;
 }
 
 a {
     text-decoration: none;
-    color: rgb(5, 22, 38);
-    
+    color: rgb(255, 180, 170);
     padding: 3%;
 }
 
@@ -25,27 +28,30 @@ a.anchor {
 
 nav {
     position: fixed;
-    width: 100%;
+    width: 100vw;
     max-height: 8vh;
+    
+    height: 8vh;
+    min-height: 30px;
 
     display: flex;
     justify-content: space-between;
     align-content: center;
-    background-color: rgba(228, 246, 255, 0.95);
+    background-color: rgba(31, 7, 0, 0.11);
     margin: 0px;
 
 }
 
 #topleft {
-    width: 50%;
     align-self: center;
 }
 
 #navlinks {
-    width: 50%;
+    min-width: 450px;
     display: flex;
     justify-content: space-between;
     align-self: center;
+    padding-right: 5vw;
 }
 
 #buffer {
@@ -61,7 +67,13 @@ nav {
 }
 
 #content{
-    margin: 2%;
+    overflow-y: hidden;
+    position: absolute;
+    width: 80vw;
+    height: 92%;
+    top: 8vh;
+    padding-right: 10%;
+    padding-left: 10%;
 }
 
 #space {
@@ -71,9 +83,6 @@ nav {
 #socialsection {
     display: grid;
     grid-template-columns: auto auto auto;
-
-    
-
 }
 
 #social {
