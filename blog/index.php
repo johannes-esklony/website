@@ -24,7 +24,7 @@
                     <button type="submit">Search</button>
                 </form>
             </div>
-            <a href="/website/" >to homepage</a>            
+            <a href="/" >to homepage</a>            
         </div>
     </nav>
     <canvas id="backgroundanimation"></canvas>
@@ -32,7 +32,7 @@
     <div id="content" style="overflow-y: scroll;">
         <?php
         include "establish_connection.php";
-        $get_art = "SELECT art_id, art_title, LEFT(art_text, 500) as preview_text, art_datePublished FROM article ORDER BY art_datePublished DESC";
+        $get_art = "SELECT art_id, art_title, LEFT(art_text, 500) as preview_text, art_datePublished FROM Article ORDER BY art_datePublished DESC";
         $res = $conn->query($get_art);
         if ($res->num_rows > 0) {
             while ($row = $res->fetch_assoc()) {
