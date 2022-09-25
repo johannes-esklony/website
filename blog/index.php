@@ -64,7 +64,7 @@
         </a>
     </footer> -->
 
-    <script src="main.js" ></script>
+    <!-- <script src="main.js" ></script> -->
     <script src="/canvas.js"></script>
     <script src="/website/canvas.js"></script>
 </body>
